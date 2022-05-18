@@ -24,6 +24,7 @@ ECHO %NAME%, I like that.
 set favvid=0
 set hack=0
 if %name% == philip goto 
+
 :hey
 :hithere 
 :hello
@@ -34,16 +35,20 @@ set string[1]=Greetings %name%.
 set string[2]=Hi %name%.
 set string[3]=Hola %name%. (hello in spanish) 
 set string[4]=How was your day %name% ?
-set string[5]=Herro %name%. (hello in chinese)
-set string[6]=Konnichiwa %name%. (Good Afternoon in japanese)
-set /a idx=%random% %%7
+set string[5]=Konnichiwa %name%. (Good Afternoon in japanese)
+set /a idx=%random% %%6
 echo !string[%idx%]!
+
+
+:: beginning of the feedback loop
 :begin
 set TALK=TypeSomething
 SET /P TALK=
 set TALK=%TALK:?=%
 call :%TALK: =% 2>NUL
 if %errorlevel% equ 0 goto begin
+
+:: main information gathering
 :unknown
 echo I dont know how to respond to that.
 echo Can you tell me 3 ways I could respond next time you say "%TALK%" ? (Y,N)
@@ -79,7 +84,7 @@ exit /B 0
 :areyoufeelingwell 
 setlocal enabledelayedexpansion
 set string[0]=Yes, and you.
-set string[1]=Not realy,but how are you.
+set string[1]=Not realy, but how are you.
 set string[2]=No I don't feel well, but how are you.
 set /a idx=%random% %%3
 echo !string[%idx%]!
